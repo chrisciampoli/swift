@@ -1,0 +1,45 @@
+<style>
+.inactive {
+    border: none;
+    background-color: #fff;
+}
+</style>
+<div ng-controller="LocationsCtrl as locationsCtrl">
+	<p ng-hide="locationsCtrl.hasLocations">No locations yet!</p>
+	<table class="table table-hover">
+		<button id="addBtn" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#addLocation">
+	        Add Location
+	    </button>
+		<thead>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Delete</th>
+		</thead>
+		<tbody>
+		<tr ng-repeat="location in locationsCtrl.locations">
+			<td><input inline-edit type="text" ng-model="location.name" class="inactive" /></td>
+			<td><input inline-edit type="text" ng-model="location.address" class="inactive" /></td>
+			<td><button ng-click="locationsCtrl.remove(location)">Delete</button></td>
+		</tr>
+		</tbody>
+	</table>
+	<!-- Modal -->
+	<div class="modal fade" id="addLocation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">New Location</h4>
+	      </div>
+	      <div class="modal-body">
+	        <input id="locationName" type="text" ng-model="locationsCtrl.locationName"/>
+	        <input id="locationAddress" type="text" ng-model="locationsCtrl.locationAddress"/>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="locationsCtrl.add(locationsCtrl.locationName, locationsCtrl.locationAddress)">Add Location</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
