@@ -22,11 +22,12 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
+      <div ng-controller="NavigationCtrl as navigation" class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#/locations">Locations</a></li>
+          <li ng-class="{active:navigation.checkPage('home')}"><a ng-click="navigation.setPage('home')" ng-href="#">Home</a></li>
+          <li ng-class="{active:navigation.checkPage('about')}"><a ng-click="navigation.setPage('about')" ng-href="#/about">About</a></li>
+          <li ng-class="{active:navigation.checkPage('locations')}"><a ng-click="navigation.setPage('locations')" ng-href="#/locations">Locations</a></li>
+          <li ng-class="{active:navigation.checkPage('shifts')}"><a ng-click="navigation.setPage('shifts')" ng-href="#/shifts">Shifts</a></li>
           <li><a ng-href="#">Contact</a></li>
         </ul>
         <h3 class="text-muted">Swift Schedules</h3>
@@ -75,9 +76,11 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/directives/inline-edit.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/locations.js"></script>
+        <script src="scripts/controllers/navigation.js"></script>
         <!-- endbuild -->
 </body>
 </html>

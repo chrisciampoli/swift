@@ -16,7 +16,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'inline-edit'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -31,6 +32,14 @@ angular
       .when('/locations', {
         templateUrl: 'views/locations.html',
         controller: 'LocationsCtrl'
+      })
+      .when('/shifts', {
+        templateUrl: 'views/shifts.html',
+        controller: 'ShiftsCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'AuthCtrl'
       })
       .otherwise({
         redirectTo: '/'

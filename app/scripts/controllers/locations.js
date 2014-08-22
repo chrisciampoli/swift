@@ -22,20 +22,20 @@ var locations = [
 	},
 ];
 
-var app = angular.module('swiftApp')
-  .controller('LocationsCtrl', function () {
-    
-    this.locationName = 'Test';
-    this.locationAddress = 'Default address';
+angular.module('swiftApp')
+  .controller('LocationsCtrl', function ($scope) {
 
-    this.hasLocations = false;
-    this.locations = locations;
+    $scope.locationName = 'Test';
+    $scope.locationAddress = 'Default address';
+
+    $scope.hasLocations = false;
+    $scope.locations = locations;
     
-    if(this.locations) {
-    	this.hasLocations = true;
+    if($scope.locations) {
+    	$scope.hasLocations = true;
     }
     
-    this.add = function(locationName, locationAddress){
+    $scope.add = function(locationName, locationAddress){
     	// Location is going to be a package that comes
     	// from the frontside that has the complete new location object
     	// to be pushed onto the locations array
@@ -44,28 +44,18 @@ var app = angular.module('swiftApp')
     		address: locationAddress
     	};
 
-    	this.locations.push(location);
+    	$scope.locations.push(location);
+        $scope.save($scope.locations);
     };
 
-    this.save = function() {
+    $scope.save = function() {
     	console.log('Locations saved to database!');
     };
     
-    this.remove = function(location){
-    	this.locations.splice(locations.indexOf(location),1);
+    $scope.remove = function(location){
+    	$scope.locations.splice(locations.indexOf(location),1);
+        // API call out to save locations with the locations removed
+        $scope.save($scope.locations);
     };
   });
 
-app.directive('inlineEdit', function() {
-
-    return function(scope, element) {
-        element.bind('click', function(){
-            element.toggleClass('inactive');
-            if(element.hasClass('inactive')){
-                element.blur();
-                scope.$parent.locationsCtrl.save(scope.location);
-            }
-        });
-    };
-
-});

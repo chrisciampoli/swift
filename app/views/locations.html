@@ -4,8 +4,8 @@
     background-color: #fff;
 }
 </style>
-<div ng-controller="LocationsCtrl as locationsCtrl">
-	<p ng-hide="locationsCtrl.hasLocations">No locations yet!</p>
+<div ng-controller="LocationsCtrl">
+	<p ng-hide="hasLocations">No locations yet!</p>
 	<table class="table table-hover">
 		<button id="addBtn" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#addLocation">
 	        Add Location
@@ -16,10 +16,10 @@
 			<th>Delete</th>
 		</thead>
 		<tbody>
-		<tr ng-repeat="location in locationsCtrl.locations">
-			<td><input inline-edit type="text" ng-model="location.name" class="inactive" /></td>
-			<td><input inline-edit type="text" ng-model="location.address" class="inactive" /></td>
-			<td><button ng-click="locationsCtrl.remove(location)">Delete</button></td>
+		<tr ng-repeat="location in locations">
+			<td><input id="location" inline-edit data-id="{{$index}}" type="text" ng-model="location.name" class="inactive" /></td>
+			<td><input id="location" inline-edit type="text" ng-model="location.address" class="inactive" /></td>
+			<td><button ng-click="remove(location)">Delete</button></td>
 		</tr>
 		</tbody>
 	</table>
@@ -32,12 +32,12 @@
 	        <h4 class="modal-title" id="myModalLabel">New Location</h4>
 	      </div>
 	      <div class="modal-body">
-	        <input id="locationName" type="text" ng-model="locationsCtrl.locationName"/>
-	        <input id="locationAddress" type="text" ng-model="locationsCtrl.locationAddress"/>
+	        <input id="locationName" type="text" ng-model="locationName"/>
+	        <input id="locationAddress" type="text" ng-model="locationAddress"/>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="locationsCtrl.add(locationsCtrl.locationName, locationsCtrl.locationAddress)">Add Location</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="add(locationName, locationAddress)">Add Location</button>
 	      </div>
 	    </div>
 	  </div>
